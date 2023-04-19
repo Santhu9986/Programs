@@ -1,5 +1,7 @@
 package Assignments;
 
+import java.util.LinkedHashSet;
+
 public class Compare2StringAndPrintUniqueWord {
 
 	public static void main(String[] args) {
@@ -8,22 +10,21 @@ public class Compare2StringAndPrintUniqueWord {
 		String s1="fun tv show";
 		String[] sp=s.split(" ");
 		String[] sp1=s1.split(" ");
+		LinkedHashSet<String> set = new LinkedHashSet<>();
 		for(int i=0;i<sp.length;i++)
 		{
-			String temp = "";
-			for(int j=0;j<sp1.length;j++)
-			{
-				if(sp[i].equals(sp1[j]) || sp1[j].equals(sp[i])) {
-					temp="";
-					break;}
-				else if(sp[i]!=sp1[j])
-					temp=sp[i];
-				else if(sp1[j]!=sp[i])
-					temp=sp1[j];
-				
-			}
-			if(temp!="")
-				System.out.print(temp+" ");
+			set.add(sp[i]);
+		}
+		for(int i=0;i<sp1.length;i++)
+		{
+			if(set.contains(sp1[i]))
+				set.remove(sp1[i]);
+			else
+				set.add(sp1[i]);
+		}
+		for (String str : set)
+		{
+			System.out.print(str+" ");
 		}
 
 	}
